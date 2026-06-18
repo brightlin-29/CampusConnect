@@ -1,0 +1,76 @@
+/* CompanyDashboard.css */
+
+.dashboard-container {
+  min-height: 100vh;
+  background: #f4f7fc;
+  padding: 30px;
+}
+
+.dashboard-banner {
+  background: linear-gradient(135deg, #4e54c8, #8f94fb);
+  color: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-banner h1 {
+  font-weight: 700;
+}
+
+.dashboard-card {
+  color: white;
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  transition: 0.4s;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-10px);
+}
+
+.card-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.jobs-card {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.active-card {
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+}
+
+.app-card {
+  background: linear-gradient(135deg, #ff9966, #ff5e62);
+}
+
+.selected-card {
+  background: linear-gradient(135deg, #f7971e, #ffd200);
+}
+
+/* New: Vacancies card style */
+.vacancy-card {
+  background: linear-gradient(135deg, #007bff, #00c6ff);
+  color: white;
+}
+
+.info-box {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.info-box h4 {
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.btn {
+  margin-top: 10px;
+}
