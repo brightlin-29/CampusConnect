@@ -18,12 +18,7 @@ function AdminNavbar() {
         {/* Menu */}
         <div className="d-flex align-items-center">
 
-          <Link
-            to="/admin-students"
-            className="btn btn-outline-light me-2"
-          >
-            Students
-          </Link>
+         
 
           <Link
             to="/admin-companies"
