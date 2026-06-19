@@ -734,15 +734,45 @@ def admin_companies():
 
     cursor.execute("""
         SELECT
-        id,
-        name,
-        email
-        FROM companies
+            c.id,
+            c.name,
+
+            COUNT(DISTINCT j.id)
+            AS total_jobs,
+
+            COUNT(a.application_id)
+            AS total_applications,
+
+            SUM(
+                CASE
+                    WHEN a.status='Selected'
+                    THEN 1
+                    ELSE 0
+                END
+            )
+            AS selected,
+
+            IFNULL(
+                SUM(j.remaining_positions),
+                0
+            )
+            AS remaining_positions
+
+        FROM companies c
+
+        LEFT JOIN jobs j
+        ON c.id = j.company_id
+
+        LEFT JOIN applications a
+        ON j.id = a.job_id
+
+        GROUP BY c.id
     """)
 
     data = cursor.fetchall()
 
     cursor.close()
+
     conn.close()
 
     return jsonify(data)
@@ -752,8 +782,8 @@ def admin_companies():
 # DELETE COMPANY
 # ==========================
 @app.route(
-"/delete-company/<int:id>",
-methods=["DELETE"]
+    "/delete-company/<int:id>",
+    methods=["DELETE"]
 )
 def delete_company(id):
 
@@ -773,7 +803,7 @@ def delete_company(id):
     conn.close()
 
     return jsonify({
-        "status":"success"
+        "status": "success"
     })
 
 
