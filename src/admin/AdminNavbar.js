@@ -32,20 +32,7 @@ function AdminNavbar() {
             Companies
           </Link>
 
-          <Link
-            to="/admin-jobs"
-            className="btn btn-outline-warning me-2"
-          >
-            Jobs
-          </Link>
-
-          <Link
-            to="/admin-applications"
-            className="btn btn-outline-info me-4"
-          >
-            Applications
-          </Link>
-
+         
           {/* Logout */}
           <button
             className="btn btn-danger"
