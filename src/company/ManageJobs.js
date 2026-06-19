@@ -137,7 +137,9 @@ function ManageJobs() {
 
                           {job.status}
 
-                        </td>
+                        </td> 
+                        
+                        
 
                         <td>
 
