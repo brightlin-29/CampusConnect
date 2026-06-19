@@ -1,139 +1,133 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import AdminNavbar from "./AdminNavbar"; // ✅ Added
+import AdminNavbar from "./AdminNavbar";
+import { useNavigate } from "react-router-dom";
 
 function Companies() {
 
-  const [companies, setCompanies] = useState([]);
+const [companies,setCompanies]=useState([]);
 
-  useEffect(() => {
-    fetchCompanies();
-  }, []);
+const navigate=useNavigate();
 
-  const fetchCompanies = async () => {
-    try {
+useEffect(()=>{
+fetchCompanies();
+},[]);
 
-      const res = await axios.get(
-        "http://localhost:5000/admin-companies"
-      );
+const fetchCompanies=async()=>{
 
-      setCompanies(res.data);
+try{
 
-    } catch (error) {
+const res=
+await axios.get(
+"http://localhost:5000/admin-companies"
+);
 
-      console.log(error);
+setCompanies(res.data);
 
-      alert("Cannot load companies");
+}
 
-    }
-  };
+catch(err){
 
-  const deleteCompany = async (id) => {
+console.log(err);
 
-    const ok = window.confirm(
-      "Delete this company?"
-    );
+alert("Cannot load company stats");
 
-    if (!ok) return;
+}
 
-    try {
+};
 
-      await axios.delete(
-        `http://localhost:5000/delete-company/${id}`
-      );
+return(
 
-      alert("Company Deleted");
+<>
 
-      fetchCompanies();
+<AdminNavbar/>
 
-    } catch (error) {
+<div className="container mt-4">
 
-      console.log(error);
+<div className="d-flex justify-content-between mb-4">
 
-      alert("Delete Failed");
+<h2>
+Company Overview
+</h2>
 
-    }
-  };
+<button
+className="btn btn-success"
+onClick={()=>
+navigate(
+"/create-company"
+)
+}
 
-  return (
+>
 
-    <>
+Create Company </button>
 
-      <AdminNavbar />
+</div>
 
-      <div className="container mt-4">
+<div className="row">
 
-        <h2 className="mb-4">
-          All Companies
-        </h2>
+{companies.map((c)=>(
 
-        <div className="card shadow">
+<div
+className="col-md-4 mb-4"
+key={c.id}
+>
 
-          <div className="card-body">
+<div
+className="card shadow p-4"
+style={{
+borderRadius:"20px"
+}}
+>
 
-            {companies.length === 0 ? (
+<h4 className="text-primary">
+{c.name}
+</h4>
 
-              <h4>No Companies Found</h4>
+<hr/>
 
-            ) : (
+<p>
+Total Jobs:
+<b>
+ {c.total_jobs}
+</b>
+</p>
 
-              <table className="table table-bordered">
+<p>
+Applicants:
+<b>
+ {c.total_applications}
+</b>
+</p>
 
-                <thead className="table-dark">
+<p>
+Selected:
+<b>
+ {c.selected}
+</b>
+</p>
 
-                  <tr>
-                    <th>ID</th>
-                    <th>Company Name</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                  </tr>
+<p>
+Open Positions:
+<b>
+ {c.remaining_positions}
+</b>
+</p>
 
-                </thead>
+</div>
 
-                <tbody>
+</div>
 
-                  {companies.map((c) => (
+))}
 
-                    <tr key={c.id}>
+</div>
 
-                      <td>{c.id}</td>
+</div>
 
-                      <td>{c.name}</td>
+</>
 
-                      <td>{c.email}</td>
+);
 
-                      <td>
-
-                        <button
-                          className="btn btn-danger"
-                          onClick={() =>
-                            deleteCompany(c.id)
-                          }
-                        >
-                          Delete
-                        </button>
-
-                      </td>
-
-                    </tr>
-
-                  ))}
-
-                </tbody>
-
-              </table>
-
-            )}
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </>
-
-  );
 }
 
 export default Companies;
