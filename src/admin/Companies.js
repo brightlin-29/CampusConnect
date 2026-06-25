@@ -3,7 +3,7 @@ import axios from "axios";
 import AdminNavbar from "./AdminNavbar";
 import { useNavigate } from "react-router-dom";
 
-function Companies() {
+function Companies(){
 
 const [companies,setCompanies]=useState([]);
 
@@ -30,7 +30,7 @@ catch(err){
 
 console.log(err);
 
-alert("Cannot load company stats");
+alert("Cannot load companies");
 
 }
 
@@ -53,14 +53,11 @@ Company Overview
 <button
 className="btn btn-success"
 onClick={()=>
-navigate(
-"/create-company"
-)
+navigate("/create-company")
 }
-
 >
-
-Create Company </button>
+Create Company
+</button>
 
 </div>
 
@@ -74,24 +71,17 @@ key={c.id}
 >
 
 <div
-className="card shadow p-4"
+className="card p-4 shadow"
 style={{
 borderRadius:"20px"
 }}
 >
 
-<h4 className="text-primary">
+<h3 className="text-primary">
 {c.name}
-</h4>
+</h3>
 
 <hr/>
-
-<p>
-Total Jobs:
-<b>
- {c.total_jobs}
-</b>
-</p>
 
 <p>
 Applicants:
@@ -101,13 +91,19 @@ Applicants:
 </p>
 
 <p>
-Selected:
+Available Location:
 <b>
- {c.selected}
+ {" "}
+{c.locations || "No jobs posted"}
 </b>
 </p>
 
-
+<p>
+Available Jobs:
+<b className="text-success">
+ {c.available_jobs}
+</b>
+</p>
 
 </div>
 

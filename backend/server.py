@@ -736,35 +736,40 @@ def admin_companies():
         c.id,
         c.name,
 
-        COUNT(DISTINCT j.id) AS total_jobs,
+        (
+            SELECT COUNT(*)
+            FROM applications a
+            WHERE a.company_id = c.id
+        ) AS total_applications,
 
-        COUNT(a.application_id) AS total_applications,
+        (
+            SELECT COUNT(j.id)
+            FROM jobs j
+            WHERE j.company_id = c.id
+        ) AS available_jobs,
 
-        COALESCE(SUM(j.remaining_positions),0)
-        AS remaining_positions
+        (
+            SELECT GROUP_CONCAT(
+                DISTINCT j.location
+                SEPARATOR ', '
+            )
+            FROM jobs j
+            WHERE j.company_id=c.id
+        ) AS locations
 
     FROM companies c
 
-    LEFT JOIN jobs j
-    ON c.id = j.company_id
-
-    LEFT JOIN applications a
-    ON j.id = a.job_id
-
-    GROUP BY c.id
-
-    ORDER BY c.name
+    ORDER BY c.id
     """
 
     cursor.execute(query)
 
-    data = cursor.fetchall()
+    companies = cursor.fetchall()
 
     cursor.close()
     conn.close()
 
-    return jsonify(data)
-
+    return jsonify(companies)
 
 # ==========================
 # DELETE COMPANY
