@@ -107,12 +107,7 @@ Selected:
 </b>
 </p>
 
-<p>
-Open Positions:
-<b>
- {c.remaining_positions}
-</b>
-</p>
+
 
 </div>
 
