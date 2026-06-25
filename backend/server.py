@@ -725,54 +725,42 @@ def admin_students():
 # ==========================
 # ADMIN COMPANIES
 # ==========================
-@app.route("/admin-companies")
+@app.route('/admin-companies', methods=['GET'])
 def admin_companies():
 
     conn = get_db_connection()
-
     cursor = conn.cursor(dictionary=True)
 
-    cursor.execute("""
-        SELECT
-            c.id,
-            c.name,
+    query = """
+    SELECT
+        c.id,
+        c.name,
 
-            COUNT(DISTINCT j.id)
-            AS total_jobs,
+        COUNT(DISTINCT j.id) AS total_jobs,
 
-            COUNT(a.application_id)
-            AS total_applications,
+        COUNT(a.application_id) AS total_applications,
 
-            SUM(
-                CASE
-                    WHEN a.status='Selected'
-                    THEN 1
-                    ELSE 0
-                END
-            )
-            AS selected,
+        COALESCE(SUM(j.remaining_positions),0)
+        AS remaining_positions
 
-            IFNULL(
-                SUM(j.remaining_positions),
-                0
-            )
-            AS remaining_positions
+    FROM companies c
 
-        FROM companies c
+    LEFT JOIN jobs j
+    ON c.id = j.company_id
 
-        LEFT JOIN jobs j
-        ON c.id = j.company_id
+    LEFT JOIN applications a
+    ON j.id = a.job_id
 
-        LEFT JOIN applications a
-        ON j.id = a.job_id
+    GROUP BY c.id
 
-        GROUP BY c.id
-    """)
+    ORDER BY c.name
+    """
+
+    cursor.execute(query)
 
     data = cursor.fetchall()
 
     cursor.close()
-
     conn.close()
 
     return jsonify(data)
