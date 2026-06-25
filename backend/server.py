@@ -739,13 +739,13 @@ def admin_companies():
         (
             SELECT COUNT(*)
             FROM applications a
-            WHERE a.company_id = c.id
+            WHERE a.company_name = c.name
         ) AS total_applications,
 
         (
-            SELECT COUNT(j.id)
+            SELECT COUNT(*)
             FROM jobs j
-            WHERE j.company_id = c.id
+            WHERE j.company_name = c.name
         ) AS available_jobs,
 
         (
@@ -754,11 +754,10 @@ def admin_companies():
                 SEPARATOR ', '
             )
             FROM jobs j
-            WHERE j.company_id=c.id
+            WHERE j.company_name = c.name
         ) AS locations
 
     FROM companies c
-
     ORDER BY c.id
     """
 
