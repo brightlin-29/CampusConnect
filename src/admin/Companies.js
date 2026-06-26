@@ -5,148 +5,114 @@ import AdminNavbar from "./AdminNavbar";
 import { useNavigate } from "react-router-dom";
 
 function Companies() {
+  const [companies, setCompanies] = useState([]);
+  const navigate = useNavigate();
 
-const [companies, setCompanies] = useState([]);
+  useEffect(() => {
+    fetchCompanies();
+  }, []);
 
-const navigate = useNavigate();
+  const fetchCompanies = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:5000/admin-companies"
+      );
 
-useEffect(() => {
-fetchCompanies();
-}, []);
+      setCompanies(res.data || []);
+    } catch (err) {
+      console.error(err);
+      alert("Cannot load companies");
+    }
+  };
 
-const fetchCompanies = async () => {
+  return (
+    <>
+      <AdminNavbar />
 
-try {
+      <div className="container mt-4">
 
-const res = await axios.get(
-"http://localhost:5000/admin-companies"
-);
+        <div className="d-flex justify-content-between align-items-center mb-4">
 
-setCompanies(res.data);
+          <h2 className="fw-bold">
+            Company Overview
+          </h2>
 
-}
+          <button
+            className="btn btn-success"
+            onClick={() => navigate("/create-company")}
+          >
+            Create Company
+          </button>
 
-catch (err) {
+        </div>
 
-console.log(err);
+        <div className="row">
 
-alert("Cannot load companies");
+          {companies.length === 0 ? (
 
-}
+            <div className="text-center">
+              <h5>No Companies Registered</h5>
+            </div>
 
-};
+          ) : (
 
-return (
+            companies.map((c) => (
+              <div
+                className="col-md-4 mb-4"
+                key={c.id}
+              >
 
-<>
+                <div
+                  className="card shadow-lg h-100"
+                  style={{
+                    borderRadius: "20px",
+                    padding: "20px"
+                  }}
+                >
 
-<AdminNavbar />
+                  <h3 className="text-primary mb-3">
+                    {c.name}
+                  </h3>
 
-<div className="container mt-4">
+                  <hr />
 
-<div className="d-flex justify-content-between align-items-center mb-4">
+                  <p>
+                    Applicants:
+                    <b> {c.total_applications || 0}</b>
+                  </p>
 
-<h2 className="fw-bold">
-Company Overview
-</h2>
+                  <p>
+                    Available Location:
+                    <br />
 
-<button
-className="btn btn-success"
-onClick={() =>
-navigate("/create-company")
-}
->
-Create Company
-</button>
+                    <b className="text-secondary">
+                      {c.locations?.trim()
+                        ? c.locations
+                        : "No jobs posted"}
+                    </b>
 
-</div>
+                  </p>
 
-<div className="row">
+                  <p>
+                    Available Jobs:
+                    <b className="text-success">
+                      {" "}
+                      {c.available_jobs || 0}
+                    </b>
+                  </p>
 
-{companies.length === 0 ? (
+                </div>
 
-<div className="text-center">
+              </div>
+            ))
 
-<h5>
-No Companies Registered
-</h5>
+          )}
 
-</div>
+        </div>
 
-) : (
-
-companies.map((c) => (
-
-<div
-className="col-md-4 mb-4"
-key={c.id}
->
-
-<div
-className="card shadow-lg h-100"
-style={{
-borderRadius: "20px",
-padding: "20px"
-}}
->
-
-<h3 className="text-primary mb-3">
-{c.name}
-</h3>
-
-<hr />
-
-<p>
-Applicants:
-<b>
-{" "}
-{c.total_applications || 0}
-</b>
-</p>
-
-<p>
-Available Location:
-<br />
-
-<b className="text-secondary">
-
-{
-c.locations &&
-c.locations.trim() !== ""
-
-? c.locations
-
-: "No jobs posted"
-}
-
-</b>
-
-</p>
-
-<p>
-Available Jobs:
-<b className="text-success">
-{" "}
-{c.available_jobs || 0}
-</b>
-</p>
-
-</div>
-
-</div>
-
-))
-
-)}
-
-</div>
-
-</div>
-
-</>
-
-);
-
+      </div>
+    </>
+  );
 }
 
 export default Companies;
