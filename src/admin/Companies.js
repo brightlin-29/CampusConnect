@@ -1,24 +1,24 @@
+```jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AdminNavbar from "./AdminNavbar";
 import { useNavigate } from "react-router-dom";
 
-function Companies(){
+function Companies() {
 
-const [companies,setCompanies]=useState([]);
+const [companies, setCompanies] = useState([]);
 
-const navigate=useNavigate();
+const navigate = useNavigate();
 
-useEffect(()=>{
+useEffect(() => {
 fetchCompanies();
-},[]);
+}, []);
 
-const fetchCompanies=async()=>{
+const fetchCompanies = async () => {
 
-try{
+try {
 
-const res=
-await axios.get(
+const res = await axios.get(
 "http://localhost:5000/admin-companies"
 );
 
@@ -26,7 +26,7 @@ setCompanies(res.data);
 
 }
 
-catch(err){
+catch (err) {
 
 console.log(err);
 
@@ -36,23 +36,23 @@ alert("Cannot load companies");
 
 };
 
-return(
+return (
 
 <>
 
-<AdminNavbar/>
+<AdminNavbar />
 
 <div className="container mt-4">
 
-<div className="d-flex justify-content-between mb-4">
+<div className="d-flex justify-content-between align-items-center mb-4">
 
-<h2>
+<h2 className="fw-bold">
 Company Overview
 </h2>
 
 <button
 className="btn btn-success"
-onClick={()=>
+onClick={() =>
 navigate("/create-company")
 }
 >
@@ -63,7 +63,19 @@ Create Company
 
 <div className="row">
 
-{companies.map((c)=>(
+{companies.length === 0 ? (
+
+<div className="text-center">
+
+<h5>
+No Companies Registered
+</h5>
+
+</div>
+
+) : (
+
+companies.map((c) => (
 
 <div
 className="col-md-4 mb-4"
@@ -71,37 +83,51 @@ key={c.id}
 >
 
 <div
-className="card p-4 shadow"
+className="card shadow-lg h-100"
 style={{
-borderRadius:"20px"
+borderRadius: "20px",
+padding: "20px"
 }}
 >
 
-<h3 className="text-primary">
+<h3 className="text-primary mb-3">
 {c.name}
 </h3>
 
-<hr/>
+<hr />
 
 <p>
 Applicants:
 <b>
- {c.total_applications}
+{" "}
+{c.total_applications || 0}
 </b>
 </p>
 
 <p>
 Available Location:
-<b>
- {" "}
-{c.locations || "No jobs posted"}
+<br />
+
+<b className="text-secondary">
+
+{
+c.locations &&
+c.locations.trim() !== ""
+
+? c.locations
+
+: "No jobs posted"
+}
+
 </b>
+
 </p>
 
 <p>
 Available Jobs:
 <b className="text-success">
- {c.available_jobs}
+{" "}
+{c.available_jobs || 0}
 </b>
 </p>
 
@@ -109,7 +135,9 @@ Available Jobs:
 
 </div>
 
-))}
+))
+
+)}
 
 </div>
 
@@ -122,3 +150,4 @@ Available Jobs:
 }
 
 export default Companies;
+```
