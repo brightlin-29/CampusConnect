@@ -31,7 +31,7 @@ import Students from "./admin/Students";
 import Companies from "./admin/Companies";
 import Jobs from "./admin/Jobs";
 import Applications from "./admin/Applications";
-
+import CreateCompany from "./admin/CreateCompany";
 function App() {
   return (
     <BrowserRouter>
@@ -157,6 +157,8 @@ element={<Applications />}
           path="/register"
           element={<Register />}
         />
+
+        <Route path="/create-company" element={<CreateCompany/>} />
 
       </Routes>
 
