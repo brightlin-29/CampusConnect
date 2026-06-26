@@ -1,4 +1,4 @@
-```jsx
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AdminNavbar from "./AdminNavbar";
@@ -116,4 +116,4 @@ function Companies() {
 }
 
 export default Companies;
-```
+

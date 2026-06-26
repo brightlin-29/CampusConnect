@@ -1,24 +1,16 @@
-```jsx
 import "./App.css";
 
-import {
-  BrowserRouter,
-  Routes,
-  Route
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// Layout
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
-// Pages
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
-// Student
 import StudentLogin from "./pages/StudentLogin";
 import StudentDashboard from "./student/StudentDashboard";
 import StudentProfile from "./student/StudentProfile";
@@ -27,14 +19,12 @@ import AppliedJobs from "./student/AppliedJobs";
 import ResumeUpload from "./student/ResumeUpload";
 import ApplicationForm from "./student/ApplicationForm";
 
-// Company
 import CompanyLogin from "./pages/CompanyLogin";
 import CompanyDashboard from "./company/CompanyDashboard";
 import PostJob from "./company/PostJob";
 import ManageJobs from "./company/ManageJobs";
 import Applicants from "./company/Applicants";
 
-// Admin
 import AdminLogin from "./admin/AdminLogin";
 import AdminDashboard from "./admin/AdminDashboard";
 import Students from "./admin/Students";
@@ -42,25 +32,16 @@ import Companies from "./admin/Companies";
 import Jobs from "./admin/Jobs";
 import Applications from "./admin/Applications";
 import CreateCompany from "./admin/CreateCompany";
-
 function App() {
   return (
     <BrowserRouter>
 
-      {/* TEMP disable to test */}
-      {/* <Navbar /> */}
+      <Navbar />
 
       <Routes>
 
-        {/* TEST PAGE */}
-        <Route
-          path="/"
-          element={
-            <div className="container mt-5">
-              <h1>React Working ✅</h1>
-            </div>
-          }
-        />
+        {/* Home */}
+        <Route path="/" element={<Home />} />
 
         {/* Student */}
         <Route
@@ -125,40 +106,36 @@ function App() {
         />
 
         {/* Admin */}
-        <Route
-          path="/admin-login"
-          element={<AdminLogin />}
-        />
 
-        <Route
-          path="/admin-dashboard"
-          element={<AdminDashboard />}
-        />
+<Route
+  path="/admin-login"
+  element={<AdminLogin />}
+/>
 
-        <Route
-          path="/admin-students"
-          element={<Students />}
-        />
+<Route
+  path="/admin-dashboard"
+  element={<AdminDashboard />}
+/>
 
-        <Route
-          path="/admin-companies"
-          element={<Companies />}
-        />
+<Route
+  path="/admin-students"
+  element={<Students />}
+/>
 
-        <Route
-          path="/admin-jobs"
-          element={<Jobs />}
-        />
+<Route
+path="/admin-companies"
+element={<Companies />}
+/>
 
-        <Route
-          path="/admin-applications"
-          element={<Applications />}
-        />
+<Route
+path="/admin-jobs"
+element={<Jobs />}
+/>
 
-        <Route
-          path="/create-company"
-          element={<CreateCompany />}
-        />
+<Route
+path="/admin-applications"
+element={<Applications />}
+/>
 
         {/* Other */}
         <Route
@@ -181,14 +158,14 @@ function App() {
           element={<Register />}
         />
 
+        <Route path="/create-company" element={<CreateCompany/>} />
+
       </Routes>
 
-      {/* TEMP disable to test */}
-      {/* <Footer /> */}
+      <Footer />
 
     </BrowserRouter>
   );
 }
 
 export default App;
-```
