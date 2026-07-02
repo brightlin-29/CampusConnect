@@ -17,10 +17,11 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 # Database configuration
 db_config = {
-    "host": "localhost",
-    "user": "root",
-    "password": "Bright@290806",  # Update as needed
-    "database": "campusconnect"
+    "host": "2a02:4780:12:f6a7::1",
+    "user": "schoolAttendance",
+    "password": "Sensarsoft@123",
+    "database": "campusconnect",
+    "port": 3306
 }
 
 def get_db_connection():
