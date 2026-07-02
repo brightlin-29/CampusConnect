@@ -21,7 +21,7 @@ function Login() {
     try {
       const api =
         role === "Student"
-          ? "http://localhost:5000/login"
+          ? "https://test-campus-server.ramchintech.com/login"
           : "http://localhost:5000/company-login";
 
       const res = await axios.post(api, {
@@ -90,7 +90,7 @@ function Login() {
 
       const api =
         role === "Student"
-          ? "http://localhost:5000/register"
+          ? "https://test-campus-server.ramchintech.com/register"
           : "http://localhost:5000/company-register";
 
       const payload =
