@@ -13,7 +13,7 @@ function Applicants() {
     const fetchApplicants = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/company-applicants/${companyId}`
+          `https://test-campus-server.ramchintech.com/company-applicants/${companyId}`
         );
 
         console.log("Applicants:", res.data);
@@ -36,7 +36,7 @@ function Applicants() {
   // ✅ Update status function
   const updateStatus = async (applicationId, status) => {
     try {
-      await axios.post("http://localhost:5000/update-status", {
+      await axios.post("https://test-campus-server.ramchintech.com/update-status", {
         application_id: applicationId,
         status: status,
       });
@@ -45,7 +45,7 @@ function Applicants() {
 
       // refresh applicants after update
       const res = await axios.get(
-        `http://localhost:5000/company-applicants/${companyId}`
+        `https://test-campus-server.ramchintech.com/company-applicants/${companyId}`
       );
 
       setApplicants(res.data);
@@ -117,7 +117,7 @@ function Applicants() {
                         <td>
                           {app.resume ? (
                             <a
-                              href={`http://localhost:5000/resume/${app.resume}`}
+                              href={`https://test-campus-server.ramchintech.com/resume/${app.resume}`}
                               target="_blank"
                               rel="noreferrer"
                               className="btn btn-primary btn-sm"

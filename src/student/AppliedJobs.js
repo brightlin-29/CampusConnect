@@ -11,7 +11,7 @@ function AppliedJobs() {
     if (student) {
       const fetchApplications = () => {
         axios
-          .get(`http://localhost:5000/student-applications/${student.id}`)
+          .get(`https://test-campus-server.ramchintech.com/student-applications/${student.id}`)
           .then((res) => {
             setJobs(res.data);
           })
@@ -34,14 +34,14 @@ function AppliedJobs() {
 
     try {
       await axios.delete(
-        `http://localhost:5000/delete-application/${id}`
+        `https://test-campus-server.ramchintech.com/delete-application/${id}`
       );
 
       alert("Application Withdrawn Successfully");
 
       // Re-fetch applications after deletion
       axios
-        .get(`http://localhost:5000/student-applications/${student.id}`)
+        .get(`https://test-campus-server.ramchintech.com/student-applications/${student.id}`)
         .then((res) => {
           setJobs(res.data);
         })

@@ -14,7 +14,7 @@ function Applications() {
     try {
 
       const res = await axios.get(
-        "http://localhost:5000/admin-applications"
+        "https://test-campus-server.ramchintech.com/admin-applications"
       );
 
       setApplications(res.data);
@@ -39,7 +39,7 @@ function Applications() {
     try {
 
       await axios.delete(
-        `http://localhost:5000/delete-application/${id}`
+        `https://test-campus-server.ramchintech.com/delete-application/${id}`
       );
 
       alert("Application Deleted");

@@ -21,7 +21,7 @@ const fetchStudents=()=>{
 
 axios
 .get(
-"http://localhost:5000/admin-students"
+"https://test-campus-server.ramchintech.com/admin-students"
 )
 
 .then((res)=>{
@@ -154,7 +154,7 @@ students.map((student)=>(
 {student.resume ? (
 
 <a
-href={`http://localhost:5000/resume/${student.resume}`}
+href={`https://test-campus-server.ramchintech.com/resume/${student.resume}`}
 target="_blank"
 rel="noreferrer"
 className="btn btn-success btn-sm"

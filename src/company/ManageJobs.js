@@ -19,7 +19,7 @@ function ManageJobs() {
 
     axios
       .get(
-        `http://localhost:5000/manage-jobs/${company.id}`
+        `https://test-campus-server.ramchintech.com/manage-jobs/${company.id}`
       )
 
       .then((res) => {
@@ -39,7 +39,7 @@ function ManageJobs() {
     try {
 
       await axios.delete(
-        `http://localhost:5000/delete-job/${id}`
+        `https://test-campus-server.ramchintech.com/delete-job/${id}`
       );
 
       alert("Deleted");

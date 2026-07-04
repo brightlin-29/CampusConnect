@@ -31,9 +31,9 @@ function ResumeUpload() {
     formData.append("student_id", student.id);
 
     try {
-      const res = await axios.post("http://localhost:5000/upload-resume", formData);
+      const res = await axios.post("https://test-campus-server.ramchintech.com/upload-resume", formData);
       alert(res.data.message);
-      const url = `http://localhost:5000/resume/${res.data.resume}`;
+      const url = `https://test-campus-server.ramchintech.com/resume/${res.data.resume}`;
       setResumeUrl(url);
       localStorage.setItem("resumeUrl", url);
     } catch {

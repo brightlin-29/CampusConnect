@@ -39,7 +39,7 @@ try {
 const res =
 await axios.post(
 
-"http://localhost:5000/company-register",
+"https://test-campus-server.ramchintech.com/company-register",
 
 {
 name,

@@ -22,7 +22,7 @@ function Login() {
       const api =
         role === "Student"
           ? "https://test-campus-server.ramchintech.com/login"
-          : "http://localhost:5000/company-login";
+          : "https://test-campus-server.ramchintech.com/company-login";
 
       const res = await axios.post(api, {
         email,
@@ -91,7 +91,7 @@ function Login() {
       const api =
         role === "Student"
           ? "https://test-campus-server.ramchintech.com/register"
-          : "http://localhost:5000/company-register";
+          : "https://test-campus-server.ramchintech.com/company-register";
 
       const payload =
         role === "Student"

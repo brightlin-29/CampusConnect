@@ -51,7 +51,7 @@ function PostJob() {
       };
 
       const res = await axios.post(
-        "http://localhost:5000/post-job",
+        "https://test-campus-server.ramchintech.com/post-job",
         payload
       );
 

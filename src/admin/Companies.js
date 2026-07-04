@@ -15,7 +15,7 @@ function Companies() {
   const fetchCompanies = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/admin-companies"
+        "https://test-campus-server.ramchintech.com/admin-companies"
       );
 
       setCompanies(res.data || []);

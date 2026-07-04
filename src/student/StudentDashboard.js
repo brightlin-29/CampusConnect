@@ -20,7 +20,7 @@ function StudentDashboard() {
 
       // Fetch notification for the student
       axios
-        .get(`http://localhost:5000/student/${savedStudent.email}`)
+        .get(`https://test-campus-server.ramchintech.com/student/${savedStudent.email}`)
         .then((res) => {
           setMessage(res.data.notification);
         })
@@ -32,7 +32,7 @@ function StudentDashboard() {
     // Fetch messages for the student
     if (savedStudent && savedStudent.email) {
       axios
-        .get(`http://localhost:5000/student-messages/${savedStudent.email}`)
+        .get(`https://test-campus-server.ramchintech.com/student-messages/${savedStudent.email}`)
         .then((res) => {
           setMessages(res.data);
         })
@@ -54,7 +54,7 @@ function StudentDashboard() {
   const saveProfile = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/update-student",
+        "https://test-campus-server.ramchintech.com/update-student",
         student
       );
       if (response.data.status === "success") {

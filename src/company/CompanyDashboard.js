@@ -27,7 +27,7 @@ function CompanyDashboard() {
 
     axios
       .get(
-        `http://localhost:5000/company-dashboard/${loggedCompany.id}`
+        `https://test-campus-server.ramchintech.com/company-dashboard/${loggedCompany.id}`
       )
       .then((res) => {
         setStats(res.data);

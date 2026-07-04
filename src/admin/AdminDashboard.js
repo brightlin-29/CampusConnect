@@ -17,7 +17,7 @@ function AdminDashboard() {
   const fetchDashboard = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/admin-dashboard"
+        "https://test-campus-server.ramchintech.com/admin-dashboard"
       );
 
       setStats(res.data);

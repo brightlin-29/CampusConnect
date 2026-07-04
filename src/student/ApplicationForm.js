@@ -72,7 +72,7 @@ function ApplicationForm() {
       try {
 
         await axios.post(
-          "http://localhost:5000/apply-job",
+          "https://test-campus-server.ramchintech.com/apply-job",
           {
 
             student_id:

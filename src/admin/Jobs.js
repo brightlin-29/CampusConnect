@@ -14,7 +14,7 @@ function Jobs() {
     try {
 
       const res = await axios.get(
-        "http://localhost:5000/admin-jobs"
+        "https://test-campus-server.ramchintech.com/admin-jobs"
       );
 
       setJobs(res.data);
@@ -39,7 +39,7 @@ function Jobs() {
     try {
 
       await axios.delete(
-        `http://localhost:5000/delete-job/${id}`
+        `https://test-campus-server.ramchintech.com/delete-job/${id}`
       );
 
       alert("Job Deleted");
