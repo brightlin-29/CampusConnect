@@ -20,10 +20,9 @@ function Login() {
 
     try {
       const api =
-        role === "Student"
-          ? "https://test-campus-server.ramchintech.com/login"
-          : "https://test-campus-server.ramchintech.com/company-login";
-
+  role === "Student"
+    ? "https://test-campus-server.ramchintech.com/login"
+    : "https://test-campus-server.ramchintech.com/company-login";
       const res = await axios.post(api, {
         email,
         password,
@@ -89,10 +88,10 @@ function Login() {
     try {
 
       const api =
-        role === "Student"
-          ? "https://test-campus-server.ramchintech.com/register"
-          : "https://test-campus-server.ramchintech.com/company-register";
-
+  role === "Student"
+    ? "https://test-campus-server.ramchintech.com/register"
+    : "https://test-campus-server.ramchintech.com/company-register";
+    
       const payload =
         role === "Student"
           ? {

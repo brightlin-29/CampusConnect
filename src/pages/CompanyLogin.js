@@ -18,7 +18,7 @@ function CompanyLogin() {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5000/company-login",
+        "http://127.0.0.1https://test-campus-server.ramchintech.com/company-login",
         {
           email: email,
           password: password

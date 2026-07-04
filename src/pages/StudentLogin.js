@@ -19,7 +19,7 @@ function StudentLogin() {
 
 
   const response = await axios.post(
-    "http://127.0.0.1:5000/login",
+    "http://127.0.0.1https://test-campus-server.ramchintech.com/login",
     {
       email: email,
       password: password

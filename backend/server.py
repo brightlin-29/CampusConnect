@@ -25,7 +25,13 @@ db_config = {
 }
 
 def get_db_connection():
-    return mysql.connector.connect(**db_config)
+    try:
+        conn = mysql.connector.connect(**db_config)
+        print("✅ Database Connected Successfully")
+        return conn
+    except mysql.connector.Error as err:
+        print("❌ Database Connection Error:", err)
+        raise
 
 # Basic route
 @app.route("/")
@@ -37,21 +43,48 @@ def home():
 # ==========================
 @app.route('/login', methods=['POST'])
 def student_login():
-    data = request.get_json()
-    email = data.get('email')
-    password = data.get('password')
-    conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute(
-        "SELECT * FROM students WHERE email=%s AND password=%s",
-        (email, password)
-    )
-    student = cursor.fetchone()
-    cursor.close()
-    conn.close()
-    if student:
-        return jsonify({"status": "success", "student": student})
-    return jsonify({"status": "failure", "message": "Invalid Email or Password"})
+    conn = None
+    cursor = None
+
+    try:
+        data = request.get_json()
+
+        email = data.get("email")
+        password = data.get("password")
+
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute(
+            "SELECT * FROM students WHERE email=%s AND password=%s",
+            (email, password)
+        )
+
+        student = cursor.fetchone()
+
+        if student:
+            return jsonify({
+                "status": "success",
+                "student": student
+            })
+
+        return jsonify({
+            "status": "failure",
+            "message": "Invalid Email or Password"
+        })
+
+    except Exception as e:
+        print("LOGIN ERROR:", e)
+        return jsonify({
+            "status": "error",
+            "message": str(e)
+        }), 500
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 # ==========================
 # STUDENT REGISTER
@@ -870,4 +903,4 @@ def admin_applications():
 
 # KEEP THIS LAST
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True)
